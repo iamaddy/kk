@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<project name="refund" default="build">
+	<property name="src.dir" location="build" />
+    <target name="build">
+        <echo>生成src目录</echo>
+        <mkdir dir="${src.dir}"/>
+        <echo>开始合并文件</echo>
+        <concat destfile="${src.dir}/kankan.js">
+            <header trimleading="yes">
+            </header>
+			<path path="kankan.js"/>
+            <path path="utility/object.js"/>
+            <path path="utility/common.js"/>
+			<path path="utility/array.js"/>
+			<path path="utility/function.js"/>
+			<path path="utility/string.js"/>
+        </concat>
+    </target>
+</project>

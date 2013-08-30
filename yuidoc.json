@@ -1,0 +1,11 @@
+{
+    "name": "The KK API",
+    "description": "The Foo API: a library for doing simple javascript",
+    "version": "1.0.0",
+    "url": "http://yuilibrary.com/",
+    "options": {
+        "outdir": "doc",
+		"linkNatives": "true",
+		path:['./src']
+    }
+}
