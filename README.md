@@ -1,7 +1,7 @@
 kankan
 ======
 
-xunlei kankan javascript
+xunlei kankan javascript         
 模块化，高扩展性
 
 ###目录结构
@@ -24,4 +24,4 @@ xunlei kankan javascript
 [yuidoc](http://developer.yahoo.com/yui/yuidoc/ "yuidoc")，目前大部分的前端业务代码都呈现出了爆炸式的增长，业务逻辑也越来越复杂，模块越来越多。因此，为了后续的维护，需要对所有代码进行文档化。YUIDOC是用nodejs模块来实现的，并且据官方文档描述颇为简单便捷。具体可以移步到[yuidoc语法](http://yui.github.com/yuidoc/args/index.html "语法")  去学习一下。
 
 ###模块管理引擎
-[seajs](http://seajs.org/docs/ "ant")提供简单、极致的模块化开发体验，尤其适合web app的应用。个人感觉对多页面的项目并不是很适用，毕竟采用采用模块化编程和传统javascript编写各有利弊。模块化后文件打包，对于刚接触的人并不是能够很快上手，所以建议根据项目的情况采取不同的策略。
+[seajs](http://seajs.org/docs/ "ant")提供简单、极致的模块化开发体验，尤其适合web app的应用。个人感觉对多页面的项目并不是很适用，毕竟采用模块化编程和传统javascript编写各有利弊。模块化后文件打包，对于刚接触的人并不是能够很快上手，所以建议根据项目的情况采取不同的策略。
