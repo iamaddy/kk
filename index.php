@@ -76,7 +76,7 @@ background: #fff;
   </div>
 </div>
 </body>
-<script>
+<script> 
 var node = document.getElementById('tab_0');
 </script>
 <script type="text/javascript" src="sea.js"></script>
