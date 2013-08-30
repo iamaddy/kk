@@ -76,18 +76,19 @@ background: #fff;
   </div>
 </div>
 </body>
-<script> 
+<script>
 var node = document.getElementById('tab_0');
 </script>
 <script type="text/javascript" src="sea.js"></script>
 <script type="text/javascript">
 seajs.config({
 	alias: {
-		'jquery': 'jquery',
+		'jquery': './lib/jquery',
 		'kk': './src/core/build/kankan-min'
 	},
 	preload: [
-      'kk'
+      'kk',
+      'jquery'
 	]
 });
 seajs.use('modules/test/test');
