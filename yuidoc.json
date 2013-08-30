@@ -5,7 +5,13 @@
     "url": "http://yuilibrary.com/",
     "options": {
         "outdir": "doc",
-		"linkNatives": "true",
-		path:['./src']
+        "linkNatives": "true",
+        "paths": [
+            "src"
+        ],
+        "ignorePaths": [
+            "/data/vhosts/xunlei.com/misc.web/public_html/kk/src/core/build"
+        ],
+		"theme": "simple"
     }
 }

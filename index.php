@@ -91,6 +91,6 @@ seajs.config({
       'jquery'
 	]
 });
-seajs.use('modules/test/test');
+seajs.use('./modules/test/test');
 </script>
 </html>
