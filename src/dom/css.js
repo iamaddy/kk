@@ -5,7 +5,7 @@
  * @mail xuaddy@gmail.com
  * @date 2013-7-22
  * @namespance dom
- * @class css
+ * @class dom
  */
 define(function(require, exports, module){
 	var partten = /-([a-z])/ig,

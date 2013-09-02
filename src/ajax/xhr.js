@@ -160,21 +160,44 @@ define(function(require, exports, module){
 		}
 	}
 	/**
-	 * get请求
+	 * 通过远程 HTTP GET 请求载入信息。
 	 * @method get
 	 * @param {string} url 请求地址
-	 * @param {object} data 发送数据
+	 * @param {Map} data 发送数据
 	 * @param {function} cb 回调函数
 	 * @param {string} type 'json'|'text'|'xml'
+	 * @example
+	 * 		// 请求 test.php 网页，忽略返回值。
+	 * 		kk.get("test.php");
+	 * 
+	 * 		// 请求 test.php 网页，传送2个参数，忽略返回值。
+	 * 		kk.get("test.php", { name: "John", time: "2pm" } );
+	 * 
+	 * 		// 显示 test.php 返回值(HTML 或 XML，取决于返回值)。
+	 * 		kk.get("test.php", function(data){
+  				alert("Data Loaded: " + data);
+			});
+	 * @return 返回值:XMLHttpRequest
 	 */
 	kk.each(["get", "post"], function(i, method){
 		/**
-		 * post 请求
+		 * 通过远程 HTTP POST 请求载入信息
 		 * @method post
 		 * @param {string} url 请求地址
 		 * @param {object} data 发送数据
 		 * @param {function} cb 回调函数
+		 * @example
+		 * 		//请求 test.php 页面，并一起发送一些额外的数据（同时仍然忽略返回值）
+		 * 		kk.post("test.php", { name: "John", time: "2pm" } );
+		 * 
+		 * 		// 获得 test.php 页面返回的 json 格式的内容
+		 * 		kk.post("test.php", { "func": "getNameAndTime" },
+				   function(data){
+				     alert(data.name); // John
+				     console.log(data.time); //  2pm
+				   }, "json");
 		 * @param {string} type 'json'|'text'|'xml'
+		 * @return 返回值:XMLHttpRequest
 		 */
 		kk[method] = function(url, data, cb, type){
 			if(kk.isFunction(data)){
@@ -192,10 +215,16 @@ define(function(require, exports, module){
 		}
 	});
 	/**
-	 * 获取javascript脚本
+	 * 通过 HTTP GET 请求载入并执行一个 JavaScript 文件
 	 * @method getScript
 	 * @param {string} url 请求地址
+	 * @example
+	 * 		// 加载并执行 test.js ，成功后显示信息
+	 * 		kk.getScript("test.js", function(){
+			  alert("Script loaded and executed.");
+			});
 	 * @param {function} callback 回调函数
+	 * @return 返回值:XMLHttpRequest
 	 */
 	kk.getScript = function( url, callback ) {
 		return kk.get( url, undefined, callback, "script" );

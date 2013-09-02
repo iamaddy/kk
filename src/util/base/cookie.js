@@ -3,8 +3,8 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-24
+ * @submodule util
  * @class cookieStorage
- * @namespace util
  */
 define(function(require, exports, module){
 	function cookieStorage(){

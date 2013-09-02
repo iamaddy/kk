@@ -3,7 +3,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-15
- * @class common
+ * @class kk
  */
 ;(function(K, undefined){
 	var class2type = {},

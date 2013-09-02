@@ -3,7 +3,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-15
- * @class string
+ * @class kk
  */
 ;(function(K, undefined){
 	var EMPTY = '',
@@ -22,6 +22,9 @@
 	var Strings = {
 		/**
 		 * @method trim
+		 * @example
+		 * 		var str = " sdsdsd sds  ";
+		 * 		var ret = kk.trim(str) // "sdsdsd sds"
 		 * @param {string} str 查询字符串
 		 * @return {string} 空字符串或者trim之后的结果
 		 */
@@ -34,6 +37,9 @@
 			},
 		/**
 		 * @method trimL
+		 * @example
+		 * 		var str = " sdsdsd sds  ";
+		 * 		var ret = kk.trimL(str) // "sdsdsd sds  "
 		 * @param {string} str 查询字符串
 		 * @return {string} 截取左侧空字符串之后的结果
 		 */
@@ -42,6 +48,9 @@
 		},
 		/**
 		 * @method trimR
+		 * @example
+		 * 		var str = " sdsdsd sds  ";
+		 * 		var ret = kk.trimR(str) // " sdsdsd sds"
 		 * @param {string} str 查询字符串
 		 * @return {string} 截取右侧空字符串之后的结果
 		 */
@@ -50,6 +59,10 @@
 		},
 		/**
 		 * @method startWith
+		 * @example
+		 * 		var str = "sdsdsd sds";
+		 * 		var ret = kk.startWith(str, 'sd') // true
+		 * 		ret = kk.startWith(str, 'd') // false
 		 * @param {string} str 查询字符串
 		 * @param {string} prefix 查询后缀
 		 * @return {Boolean} 是否以prefix开头
@@ -60,6 +73,10 @@
 		},
 		/**
 		 * @method endWith
+		 * @example
+		 * 		var str = "sdsdsd sds";
+		 * 		var ret = kk.endWith(str, 'sd') // false
+		 * 		ret = kk.endWith(str, 's') // true
 		 * @param {string} str 查询字符串
 		 * @param {string} suffix 查询后缀
 		 * @return {Boolean} 是否以suffix结尾
@@ -71,6 +88,9 @@
 		},
 		/**
 		 * @method upFirst
+		 * @example
+		 * 		var str = "sdsdsd sds";
+		 * 		var ret = kk.upFirst(str) // "Sdsdsd sds"
 		 * @param {string} str 处理字符串
 		 * @return {string} 返回首字母大写的字符串
 		 */
@@ -80,6 +100,9 @@
 		},
 		/**
 		 * @method commaNumber
+		 * @example
+		 * 		var str = "1234567";
+		 * 		var ret = kk.commaNumber(str) // "1,234,567"
 		 * @param {string|number} str 处理字符串
 		 * @return {string} 返回以逗号分隔的字符串
 		 * 23232312323434 =》 23,232,312,323,434
@@ -89,9 +112,11 @@
 		},
 		/**
 		 * @method param
+		 * @example
+		 * 		var str = {a: "12", b: "23"};
+		 * 		var ret = kk.param(str) // "a=12&b=23"
 		 * @param {object} a key value对象 
 		 * @return {string} 返回以&连接的字符串
-		 * {a: "12", b: "23"} => a=12&b=23
 		 */
 		param: function(a){
 			var s = [],
@@ -110,9 +135,11 @@
 		},
 		/**
 		 * @method parseJSON
+		 * @example
+		 * 		var str = "{"a": "12", "b": "23"}";
+		 * 		var ret = kk.parseJSON(str) // {a: "12", b: "23"}
 		 * @param {string} json字符串
 		 * @return {object} json对象
-		 * "{"a": "12", "b": "23"}" => {a: "12", b: "23"}
 		 */
 		parseJSON: function(data){
 			if(typeof data !== "string" || !data){

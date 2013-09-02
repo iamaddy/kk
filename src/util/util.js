@@ -1,7 +1,5 @@
 /**
  * @submodule util
- * @main kk
- * @class util
  */
 define(function(require, exports, module){
 	var url = require('./base/url');

@@ -3,8 +3,8 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-15
+ * @submodule util
  * @class url
- * @namespace util
  */
 define(function(require, exports, module){
 	var Url = (function(url) {

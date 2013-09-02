@@ -12,7 +12,15 @@ define(function(require, exports, module){
 	
 	var slice = Array.prototype.slice;
 	/**
+	 * dom选择器，支持id/class/tag，三种选择方式
 	 * @method dom
+	 * @example
+	 * 		define(function(require, exports, module){
+	 * 			var dom = require('./dom');
+	 * 			var elem = dom('#id');
+	 * 			var elem1 = dom('.class');
+	 * 			var elem2 = dom('tag');
+	 * 		}
 	 * @param {string} query
 	 * @param {HTMLDocument|HTMLElement} context 上下文
 	 * @return {HTMLElement} node 查询到的节点

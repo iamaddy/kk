@@ -3,7 +3,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-15
- * @class function 
+ * @class kk 
  */
 ;(function(K, undefined){
 	var rnotwhite = /\S/;

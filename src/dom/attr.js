@@ -4,8 +4,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-18
- * @namespace dom
- * @class attr
+ * @class dom
  */
 define(function(require, exports, module){
 	var doc = kk.Env.document,

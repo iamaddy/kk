@@ -3,7 +3,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-16
- * @class array
+ * @class kk
  */
 ;(function(K, undefined){
 	var toString = Object.prototype.toString,
@@ -20,6 +20,13 @@
 		 * @method makeArray
 		 * @param {array} array 待合并对象
 		 * @param {array} results 目标数组
+		 * @example
+		 * 		var s = [1, 3];
+		 * 		var ret = kk.makeArray(s); // [1,3]
+		 * 		result = [3, 5];
+		 * 		ret = kk.makeArray(s, result); // [3, 5, 1, 3]
+		 * 		s = '12354';
+		 * 		ret = kk.makeArray(s, result); // [3, 5, "12354"]
 		 * @return {array} 返回合并之后的数组
 		 */
 		makeArray: function( array, results ) {
@@ -37,6 +44,12 @@
 		
 		/**
 		 * @method merge
+		 * @example
+		 * 		var s = [1, 3];
+		 * 		var t = [2, 4];
+		 * 		var ret = kk.merge(s, t); // [1, 3, 2,4]
+		 * 		result = {a: 1, b: "sss"};
+		 * 		ret = kk.merge(s, result); // [1, 3, 1, "sss"]
 		 * @param {array} target 目标数组
 		 * @param {array|object} arr 合并对象，可以数组或者对象
 		 * @return {array} 返回合并后的数组
@@ -57,6 +70,10 @@
 		},
 		/**
 		 * @method indexOf
+		 * @example
+		 * 		var number = [1, 3, 4, 3, 5, 5, 4];
+		 * 		var ret = kk.indexOf(number, 4) // 2
+		 * 		var ret = kk.indexOf(number, 6) // -1
 		 * @param {array} arr 查询数组
 		 * @param {arr} item 待查找对象
 		 * @return {int} 返回item首次出现在数组的位置，优先调用原生接口
@@ -73,6 +90,10 @@
 			},
 		/**
 		 * @method lastIndeOf
+		 * @example
+		 * 		var number = [1, 3, 4, 3, 5, 5, 4];
+		 * 		var ret = kk.lastIndeOf(number, 4) // 0
+		 * 		var ret = kk.lastIndeOf(number, 6) // -1
 		 * @param {array} arr 查询数组
 		 * @param {arr} item 待查找对象
 		 * @return {int} 从右往左，返回item首次出现在数组的位置，优先调用原生接口
@@ -83,12 +104,15 @@
 			}:
 			function(arr, item){
 				for(var i = arr.length - 1; i >= 0; i--){
-					if(item === arr[i]) break
+					if(item === arr[i]) return i;
 				}
-				return i;
+				return -1;
 			},
 		/**
 		 * @method inArray
+		 * @example
+		 * 		var number = [1, 3, 4, 3, 5, 5, 4];
+		 * 		var ret = kk.inArray(number, 4) // true
 		 * @param {array} arr 查询数组
 		 * @param {arr} item 待查找对象
 		 * @return {boolean} 是否存在
@@ -98,6 +122,12 @@
         },
         /**
          * @method map
+         * @example
+		 * 		var s = [1, 3, 4, 2];
+		 * 		var ret = kk.filter(function(item, index, array){
+		 * 			return (item * item);
+		 * 		})
+		 * 		alert(ret); // [1, 9, 16, 4]
 		 * @param {array} arr 查询数组
 		 * @param {function} iterator 迭代函数
 		 * @param {object} context 迭代器的执行环境
@@ -117,6 +147,12 @@
         },
         /**
          * @method filter
+         * @example
+		 * 		var s = [1, 3, 4, 2];
+		 * 		var ret = kk.filter(function(item, index, array){
+		 * 			return (item > 2);
+		 * 		})
+		 * 		alert(ret); // [3, 4]
 		 * @param {array} arr 查询数组
 		 * @param {function} iterator 迭代函数
 		 * @param {object} context 迭代器的执行环境
@@ -137,6 +173,12 @@
         },
         /**
          * @method every
+         * @example
+		 * 		var s = [1, 3, 4, 2];
+		 * 		var ret = kk.every(function(item, index, array){
+		 * 			return (item > 2);
+		 * 		})
+		 * 		alert(ret); // false
 		 * @param {array} arr 查询数组
 		 * @param {function} iterator 迭代函数
 		 * @param {object} context 迭代器的执行环境
@@ -155,6 +197,12 @@
         },
         /**
          * @method some
+         * @example
+		 * 		var s = [1, 3, 4, 2];
+		 * 		var ret = kk.some(function(item, index, array){
+		 * 			return (item > 2);
+		 * 		})
+		 * 		alert(ret); // true
 		 * @param {array} arr 查询数组
 		 * @param {function} iterator 迭代函数
 		 * @param {object} context 迭代器的执行环境

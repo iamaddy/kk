@@ -4,7 +4,7 @@
  * @mail xuaddy@gmail.com
  * @date 2013-7-24
  * @namespance dom
- * @class doc
+ * @class dom
  */
 define(function(require, exports, module){
 	var valHooks = {
@@ -105,6 +105,13 @@ define(function(require, exports, module){
 		/**
 		 * 获取|设置elem的value值
 		 * @method val
+		 * @example
+		 * 		define(function(require, exports, module){
+		 * 			var dom = require('./dom');
+		 * 			var elem = dom('#id');
+		 * 			var val = dom.val(elem);
+		 * 			dom.val(elem, "newval");
+		 * 		}
 		 * @param {HTMLElement} elems
 		 * @param {string} value
 		 * @return {string|HTMLElement} 返回elem的value值|修改后的节点
@@ -132,6 +139,13 @@ define(function(require, exports, module){
 		/**
 		 * 获取|改变节点的text值
 		 * @method text
+		 * @example
+		 * 		define(function(require, exports, module){
+		 * 			var dom = require('./dom');
+		 * 			var elem = dom('#id');
+		 * 			var text = dom.text(elem);
+		 * 			dom.text(elem, "newtest");
+		 * 		}
 		 * @param {HTMLElement} elems
 		 * @param {string} value
 		 * @return {string|HTMLElement} 返回elem的text值|修改后的节点
@@ -161,6 +175,13 @@ define(function(require, exports, module){
 		/**
 		 * 追加element元素
 		 * @method append
+		 * @example
+		 * 		define(function(require, exports, module){
+		 * 			var dom = require('./dom');
+		 * 			var elem = dom('#id');
+		 * 			dom.append(elem, "<div>test</div>");
+		 * 			dom.append(elem, newElem);
+		 * 		}
 		 * @param {HTMLElement} elems
 		 * @param {string} value
 		 * @return {HTMLElement} elems
@@ -173,6 +194,12 @@ define(function(require, exports, module){
 		/**
 		 * 清空elems子节点的html，本身不改变
 		 * @method empty
+		 * @example
+		 * 		define(function(require, exports, module){
+		 * 			var dom = require('./dom');
+		 * 			var elem = dom('#id');
+		 * 			dom.empty(elem);
+		 * 		}
 		 * @param {HTMLElement} elems
 		 * @return {HTMLElement} elems
 		 */
@@ -180,6 +207,12 @@ define(function(require, exports, module){
 		/**
 		 * 移除指定的节点
 		 * @method remove
+		 * @example
+		 * 		define(function(require, exports, module){
+		 * 			var dom = require('./dom');
+		 * 			var elem = dom('#id');
+		 * 			dom.remove(elem);
+		 * 		}
 		 * @param {HTMLElement} elems
 		 */
 		remove: function(elems){

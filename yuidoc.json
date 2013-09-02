@@ -12,6 +12,6 @@
         "ignorePaths": [
             "/data/vhosts/xunlei.com/misc.web/public_html/kk/src/core/build"
         ],
-		"theme": "simple"
+		"themedir": "/usr/local/lib/node_modules/yuidocjs/themes/alloy-apidocs-theme-master"
     }
 }

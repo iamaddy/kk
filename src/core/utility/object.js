@@ -3,7 +3,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-10
- * @class object
+ * @class kk
  */
 ;(function(K, undefined){
 	var hasEnumBug = !({toString: 1}['propertyIsEnumerable']('toString')),

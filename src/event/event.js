@@ -1,6 +1,5 @@
 /**
  * @submodule event
- * @main kk
  * @class event
  */
 define(function(require, exports, module){
@@ -63,6 +62,23 @@ define(function(require, exports, module){
 		}
 	};
 	var event = {
+			/**
+			 * 在选择元素上绑定一个或多个事件的事件处理函数,
+			 * @method add
+			 * @param {HTMLElement} elems
+			 * @param {String} types
+			 * @param {Function} handler
+			 * @param {Map} data
+			 * @example
+			 * 		var elem = dom('#node');
+			 * 		event.add(elem, "click", function(){
+						alert( 1 );
+					});
+					var form = dom('form');
+					event.add(form, function(event) {
+					  event.stopPropagation();
+					});
+			 */
 		 add: function(elems, types, handler, data){
 			 if(typeof elems === 'undefined') return;
 			 if(typeof elems.length === 'undefined'){
@@ -114,8 +130,22 @@ define(function(require, exports, module){
 		}
 	};
 	/**
-	 * 遍历所有事件类型
-	 * @case event.click(elem, fn);
+	 * @method click|mouseout|mouseover|load|focus|select|blur|mousedown|mouseup|mouseover
+	 * @param {HTMLElement} elem
+	 * @param {Function} fn
+	 * @example
+	 * 		event.click(elem, function(){
+	 * 			alert(1);	
+	 * 		});
+	 * 		
+	 * 		event.mouseout(elem, function(){
+	 * 			alert(1);	
+	 * 		});
+	 * 		
+	 * 		event.focus(elem, function(){
+	 * 			alert(1);	
+	 * 		});
+	 * 
 	 */
 	kk.each( ("blur focus focusin focusout load resize scroll unload click dblclick " +
 			"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +

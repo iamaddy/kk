@@ -1,8 +1,8 @@
 /**
- * tabs
+ * tab组件，<a target="_blank" href="http://misc.web.xunlei.com/kk/demo/tabs/tabsdemo.html">查看demo</a>
  * @author xubin
  * @date 2013-8-28
- * @class tooltip
+ * @class Tabs
  */
 define(function(require, exports, module){
 	var dom 	= require('../dom/dom');
@@ -10,15 +10,68 @@ define(function(require, exports, module){
 	
 	function Tabs(config){
 		this.defaults 	= {
+			/**
+			 * tab选择器，通常为class，tagName等。
+			@property tabElem 
+			@type String
+			@default ""
+			**/
 			tabElem 	: '',
+			/**
+			 * panel选择器，通常为class，tagName等。
+			@property panelElem 
+			@type String
+			@default ""
+			**/
 			panelElem 	: '',
+			/**
+			 * 每个tab停留的时间(单位秒)
+			@property time 
+			@type int
+			@default 5
+			**/
 			time 		: 5,
-			defaultIndex: 2,
+			/**
+			 * 默认显示tab的顺序
+			@property defaultIndex 
+			@type int
+			@default 1
+			**/
+			defaultIndex: 1,
+			/**
+			 * 触发panel显示的方法，click，mouseover等
+			@property handler 
+			@type String
+			@default "click"
+			**/
 			handler 	: 'click',
-			fromFirst 	: true,
+			/**
+			 * 轮播一轮之后停留|一直轮播
+			@property alwaysRun 
+			@type boolean
+			@default false
+			**/
 			alwaysRun 	: false,
+			/**
+			 * 是否自动轮播
+			@property auto 
+			@type boolean
+			@default true
+			**/
 			auto 		: true,
+			/**
+			@property selectedClass 
+			@type String
+			@default "on"
+			**/
 			selectedClass : 'on',
+			/**
+			 * 
+			 * 自定义每项tab时间（单位秒）
+			@property timeCollection 
+			@type arr
+			@default []
+			**/
 			timeCollection : []
 		};
 		this.tabs 		= [];
@@ -49,11 +102,11 @@ define(function(require, exports, module){
 			}
 			this.setSelectedItem(this.defaults.defaultIndex);
 			if(this.defaults.auto) {
-				this._play();
+				this.play();
 				event.add(this.tabs, 'mouseover', function(){that.stop();}); 
 				event.add(this.panels, 'mouseover', function(){that.stop();});
-				event.add(this.tabs, 'mouseout', function(){that._play();}); 
-				event.add(this.panels, 'mouseout', function(){that._play();});
+				event.add(this.tabs, 'mouseout', function(){that.play();}); 
+				event.add(this.panels, 'mouseout', function(){that.play();});
 			}
 			event.add(this.tabs, this.defaults.handler, function(){
 				that.selectedIndex = this.id.split('_')[1];
@@ -61,9 +114,13 @@ define(function(require, exports, module){
 			});
 		},
 		/**
-		 * 开始跑马灯
+		 * 开始自动轮播
+		 * @method play
+		 * @return {Tabs} 组件对象
+		 * @example
+		 * 		mytab.play();
 		 */
-		_play: function(){
+		play: function(){
 			var self = this;
 			var time = (this.defaults.timeCollection[this.selectedIndex] || this.defaults.time) * 1000;
 			this.timer = setInterval(function(){
@@ -72,12 +129,20 @@ define(function(require, exports, module){
 					self.selectedIndex = 0;
 				}
 				self.setSelectedItem(self.selectedIndex);
-				self.stop()._play();
+				self.stop().play();
 			}, time);
 			return this;
 		},
 		/**
-		 * 停止跑马灯
+		 * 停止播放
+		 * @method stop
+		 * @example
+		 *  	var mytab = new tabs({
+					tabElem: '.tab',
+					panelElem: ".tab-pannel",
+					timeCollection: [1, 5, 10]
+				});
+				mytab.stop();
 		 */
 		stop: function(){
 			clearInterval(this.timer);
@@ -85,8 +150,12 @@ define(function(require, exports, module){
 		},
 		/**
 		 * 设置选中tab
+		 * @method setSelectedItem
+		 * @param {int} index tab的序号，0<=index<=tab.length -1
+		 * @return {Tabs} 组件对象
 		 */
 		setSelectedItem: function(index){
+			if(index < 0 || index > this.tabs.length - 1) return;
 			dom.removeClass(this.tabs, this.defaults.selectedClass);
 			dom.addClass(this.tabs[index], this.defaults.selectedClass);
 			dom.css(this.panels, 'display', 'none');
@@ -105,12 +174,15 @@ define(function(require, exports, module){
 			if(!this.defaults.alwaysRun && index === this.defaults.defaultIndex) {
 				this.stop();
 			}
+			return this;
 		},
 		/**
 		 * 单独配置panel的停留时间
-		 * @params collection{object}
-		 * @example{0: 1, 1: 10}
-		 * key是panel的顺序，value是时间值，单位为秒
+		 * @method setPlayTime
+		 * @params {object} collection key是panel的顺序，value是时间值，单位为秒
+		 * @example
+		 * 		mytab.setPlayTime({0: 1, 1: 10});
+		 * 		// tab0的停留时间为1秒，tab1的停留时间为10秒
 		 */
 		setPlayTime: function(collection){
 			if(typeof collection !== 'object' || kk.isEmptyObject(collection)){
@@ -130,32 +202,47 @@ define(function(require, exports, module){
 		},
 		/**
 		 * 获取所有的tabs
+		 * @method getTabs
+		 * @return {HTMLElement}
 		 */
 		getTabs: function(){
 			return this.tabs;
 		},
 		/**
 		 * 获取所有的panels
+		 * @method getPanels
+		 * @return {HTMLElement}
 		 */
 		getPanels: function(){
 			return this.panels;
 		},
 		/**
 		 * 返回选中的tab
+		 * @method getCurrentTab
+		 * @return {HTMLElement}
 		 */
 		getCurrentTab: function(){
 			return this.tabs[this.selectedIndex];
 		},
 		/**
 		 * 返回选中的panel
+		 * @method getCurrentPanel
+		 * @return {HTMLElement}
 		 */
 		getCurrentPanel: function(){
 			return this.panels[this.selectedIndex];
 		},
 		/**
 		 * 为切换添加回调函数
-		 * @params fn {function} 回调函数
-		 * @params context {object} 执行上下文
+		 * @method addCallback
+		 * @example
+		 * 		function a(){
+		 * 			alert(0);
+		 * 		}
+		 * 		mytab.addCallback(a);
+		 * @return {Tabs} 组件对象
+		 * @param fn {function} 回调函数
+		 * @param context {object} 执行上下文
 		 */
 		addCallback: function(fn, context){
 			if(!kk.isFunction(fn)){
@@ -166,7 +253,11 @@ define(function(require, exports, module){
 		},
 		/**
 		 * 为切换删除回调函数 支持匿名函数，根据函数toString()值是否相等剔除回调函数
-		 * @params fn {function} 回调函数
+		 * @method removeCallback
+		 * @example
+		 * 		mytab.removeCallback(a);
+		 * @return {Tabs} 组件对象
+		 * @param fn {function} 回调函数
 		 */
 		removeCallback: function(fn){
 			var ret = [];
@@ -176,6 +267,7 @@ define(function(require, exports, module){
 				}
 			});
 			this.callbacks = ret;
+			return this;
 		}
 	}
 	module.exports = Tabs;

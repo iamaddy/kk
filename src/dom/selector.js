@@ -3,8 +3,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-10
- * @namespace dom
- * @class selector
+ * @class dom
  */
 define(function(require, exports, module) {
 	/**
