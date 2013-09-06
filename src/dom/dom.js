@@ -9,6 +9,7 @@ define(function(require, exports, module){
 	var attr = require('./attr');
 	var css = require('./css');
 	var doc = require('./doc');
+	var offset = require('./offset');
 	
 	var slice = Array.prototype.slice;
 	/**
@@ -35,6 +36,7 @@ define(function(require, exports, module){
 	kk.extend(dom, attr);
 	kk.extend(dom, css);
 	kk.extend(dom, doc);
+	kk.extend(dom, offset);
 	kk.extend({query: selector});
 	return dom;
 });
