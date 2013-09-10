@@ -104,7 +104,7 @@ define(function(require, exports, module){
 				return;
 			}
 			// 像素单位px处理
-			if ( type === "number" && !cssNumber[ origName ] ) {
+			if ( type === "number" && !cssNumber[ name ] ) {
 				value += "px";
 			}
 			if ( !hooks || !("set" in hooks) || (value = hooks.set( elem, value )) !== undefined ) {

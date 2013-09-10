@@ -1,16 +1,11 @@
 /**
- * dom元素的doc类，处理document文档
+ * document的选择器类
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-10
- * @class dom
+ * @class selector
  */
 define(function(require, exports, module) {
-	/**
-	 * 参照jquery选择器
-	 * 选择方式
-	 * tag|.class|#id  
-	 */
 	var Expr = {};
 	// 浏览器兼容性检测
 	(function(){
@@ -59,13 +54,21 @@ define(function(require, exports, module) {
 	})();
 	
 	/**
+	 * 选择器，选择方式tag|.class|#id
 	 * @method query
 	 * @param {string} query
 	 * @param {HTMLDocument|HTMLElement} context 上下文
 	 * @return {HTMLElement} node 查询到的节点
 	 */
 	function find(query, context, extra){
+		if(query.length > 1){
+			context = query[1];
+			query = query[0];
+		}
 		context = context || document;
+		if(context.length){
+			context = context[0];
+		}
 		if(context.querySelectorAll){
 			return kk.makeArray( context.querySelectorAll(query), extra );
 		} else {

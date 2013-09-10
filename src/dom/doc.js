@@ -77,12 +77,27 @@ define(function(require, exports, module){
 				} else {
 					value = value.replace(rxhtmlTag, "<$1></$2>");
 				}
-				elem.innerHTML += value;
+				elem.appendChild(_buildFragment(value));
 			} else{
 				elem.appendChild(value);
 			}
 		});
 		return elems;
+	}
+	/**
+	 * 根据string生成html片段
+	 * @param value html 字符串
+	 * @return documentFragment
+	 */
+	function _buildFragment(value){
+		var elt = document.createElement('div');
+		elt.innerHTML = value;
+		var frag = document.createDocumentFragment();
+		while(elt.firstChild){
+			frag.appendChild(elt.firstChild);
+		}
+		elt = null;
+		return frag;
 	}
 	/**
 	 * @param {HTMLNodes} elems
@@ -119,7 +134,7 @@ define(function(require, exports, module){
 		val: function(elem, value){
 			if(!arguments.length) return;
 			if(arguments.length === 1){
-				elem = elem && elem[0];
+				elem = elem.length ? elem[0] : elem;
 				if(elem){
 					return (elem.value || "").replace(/\r/g, "");
 				}
@@ -131,7 +146,7 @@ define(function(require, exports, module){
 				}
 				var hooks = valHooks[ item.nodeName.toLowerCase() ] || valHooks[ item.type ];
 				if ( !hooks || !("set" in hooks) || hooks.set( item, val, "value" ) === undefined ) {
-					elem.value = value;
+					item.value = value;
 				}
 			});
 			return elem;
@@ -153,7 +168,7 @@ define(function(require, exports, module){
 		text: function(elems, value){
 			if(!arguments.length) return;
 			if(arguments.length === 1){
-				var elem = elems && elems[0];
+				var elem = elems.length ? elems[0] : elems;
 				return _ergodicNode([elem]);
 			}
 			if ( typeof value !== "object" && text !== undefined ) {
