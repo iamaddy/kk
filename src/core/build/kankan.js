@@ -58,7 +58,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-10
- * @class object
+ * @class kk
  */
 ;(function(K, undefined){
 	var hasEnumBug = !({toString: 1}['propertyIsEnumerable']('toString')),
@@ -155,7 +155,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-15
- * @class common
+ * @class kk
  */
 ;(function(K, undefined){
 	var class2type = {},
@@ -334,7 +334,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-16
- * @class array
+ * @class kk
  */
 ;(function(K, undefined){
 	var toString = Object.prototype.toString,
@@ -351,6 +351,13 @@
 		 * @method makeArray
 		 * @param {array} array 待合并对�?
 		 * @param {array} results 目标数组
+		 * @example
+		 * 		var s = [1, 3];
+		 * 		var ret = kk.makeArray(s); // [1,3]
+		 * 		result = [3, 5];
+		 * 		ret = kk.makeArray(s, result); // [3, 5, 1, 3]
+		 * 		s = '12354';
+		 * 		ret = kk.makeArray(s, result); // [3, 5, "12354"]
 		 * @return {array} 返回合并之后的数�?
 		 */
 		makeArray: function( array, results ) {
@@ -368,6 +375,12 @@
 		
 		/**
 		 * @method merge
+		 * @example
+		 * 		var s = [1, 3];
+		 * 		var t = [2, 4];
+		 * 		var ret = kk.merge(s, t); // [1, 3, 2,4]
+		 * 		result = {a: 1, b: "sss"};
+		 * 		ret = kk.merge(s, result); // [1, 3, 1, "sss"]
 		 * @param {array} target 目标数组
 		 * @param {array|object} arr 合并对象，可以数组或者对�?
 		 * @return {array} 返回合并后的数组
@@ -388,6 +401,10 @@
 		},
 		/**
 		 * @method indexOf
+		 * @example
+		 * 		var number = [1, 3, 4, 3, 5, 5, 4];
+		 * 		var ret = kk.indexOf(number, 4) // 2
+		 * 		var ret = kk.indexOf(number, 6) // -1
 		 * @param {array} arr 查询数组
 		 * @param {arr} item 待查找对�?
 		 * @return {int} 返回item首次出现在数组的位置，优先调用原生接�?
@@ -404,6 +421,10 @@
 			},
 		/**
 		 * @method lastIndeOf
+		 * @example
+		 * 		var number = [1, 3, 4, 3, 5, 5, 4];
+		 * 		var ret = kk.lastIndeOf(number, 4) // 0
+		 * 		var ret = kk.lastIndeOf(number, 6) // -1
 		 * @param {array} arr 查询数组
 		 * @param {arr} item 待查找对�?
 		 * @return {int} 从右�?��，返回item首次出现在数组的位置，优先调用原生接�?
@@ -414,12 +435,15 @@
 			}:
 			function(arr, item){
 				for(var i = arr.length - 1; i >= 0; i--){
-					if(item === arr[i]) break
+					if(item === arr[i]) return i;
 				}
-				return i;
+				return -1;
 			},
 		/**
 		 * @method inArray
+		 * @example
+		 * 		var number = [1, 3, 4, 3, 5, 5, 4];
+		 * 		var ret = kk.inArray(number, 4) // true
 		 * @param {array} arr 查询数组
 		 * @param {arr} item 待查找对�?
 		 * @return {boolean} 是否存在
@@ -429,6 +453,12 @@
         },
         /**
          * @method map
+         * @example
+		 * 		var s = [1, 3, 4, 2];
+		 * 		var ret = kk.filter(function(item, index, array){
+		 * 			return (item * item);
+		 * 		})
+		 * 		alert(ret); // [1, 9, 16, 4]
 		 * @param {array} arr 查询数组
 		 * @param {function} iterator 迭代函数
 		 * @param {object} context 迭代器的执行环境
@@ -448,6 +478,12 @@
         },
         /**
          * @method filter
+         * @example
+		 * 		var s = [1, 3, 4, 2];
+		 * 		var ret = kk.filter(function(item, index, array){
+		 * 			return (item > 2);
+		 * 		})
+		 * 		alert(ret); // [3, 4]
 		 * @param {array} arr 查询数组
 		 * @param {function} iterator 迭代函数
 		 * @param {object} context 迭代器的执行环境
@@ -468,6 +504,12 @@
         },
         /**
          * @method every
+         * @example
+		 * 		var s = [1, 3, 4, 2];
+		 * 		var ret = kk.every(function(item, index, array){
+		 * 			return (item > 2);
+		 * 		})
+		 * 		alert(ret); // false
 		 * @param {array} arr 查询数组
 		 * @param {function} iterator 迭代函数
 		 * @param {object} context 迭代器的执行环境
@@ -486,6 +528,12 @@
         },
         /**
          * @method some
+         * @example
+		 * 		var s = [1, 3, 4, 2];
+		 * 		var ret = kk.some(function(item, index, array){
+		 * 			return (item > 2);
+		 * 		})
+		 * 		alert(ret); // true
 		 * @param {array} arr 查询数组
 		 * @param {function} iterator 迭代函数
 		 * @param {object} context 迭代器的执行环境
@@ -508,7 +556,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-15
- * @class function 
+ * @class kk 
  */
 ;(function(K, undefined){
 	var rnotwhite = /\S/;
@@ -546,7 +594,7 @@
 			bind = FP.bind,
 			slice = Array.prototype.slice,
 			ctor = function(){};
-		if(!K.isFunciton(fn)) K.error('TypeError');
+		if(!K.isFunction(fn)) K.error('TypeError');
 		if(bind === fn.bind && bind) bind.apply(fn, slice.call(arguments, 1));
 		args = slice.call(arguments, 2);
 		return bound = function(){
@@ -608,7 +656,7 @@
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-15
- * @class string
+ * @class kk
  */
 ;(function(K, undefined){
 	var EMPTY = '',
@@ -627,6 +675,9 @@
 	var Strings = {
 		/**
 		 * @method trim
+		 * @example
+		 * 		var str = " sdsdsd sds  ";
+		 * 		var ret = kk.trim(str) // "sdsdsd sds"
 		 * @param {string} str 查询字符�?
 		 * @return {string} 空字符串或�?trim之后的结�?
 		 */
@@ -639,6 +690,9 @@
 			},
 		/**
 		 * @method trimL
+		 * @example
+		 * 		var str = " sdsdsd sds  ";
+		 * 		var ret = kk.trimL(str) // "sdsdsd sds  "
 		 * @param {string} str 查询字符�?
 		 * @return {string} 截取左侧空字符串之后的结�?
 		 */
@@ -647,6 +701,9 @@
 		},
 		/**
 		 * @method trimR
+		 * @example
+		 * 		var str = " sdsdsd sds  ";
+		 * 		var ret = kk.trimR(str) // " sdsdsd sds"
 		 * @param {string} str 查询字符�?
 		 * @return {string} 截取右侧空字符串之后的结�?
 		 */
@@ -655,6 +712,10 @@
 		},
 		/**
 		 * @method startWith
+		 * @example
+		 * 		var str = "sdsdsd sds";
+		 * 		var ret = kk.startWith(str, 'sd') // true
+		 * 		ret = kk.startWith(str, 'd') // false
 		 * @param {string} str 查询字符�?
 		 * @param {string} prefix 查询后缀
 		 * @return {Boolean} 是否以prefix�?��
@@ -665,6 +726,10 @@
 		},
 		/**
 		 * @method endWith
+		 * @example
+		 * 		var str = "sdsdsd sds";
+		 * 		var ret = kk.endWith(str, 'sd') // false
+		 * 		ret = kk.endWith(str, 's') // true
 		 * @param {string} str 查询字符�?
 		 * @param {string} suffix 查询后缀
 		 * @return {Boolean} 是否以suffix结尾
@@ -676,6 +741,9 @@
 		},
 		/**
 		 * @method upFirst
+		 * @example
+		 * 		var str = "sdsdsd sds";
+		 * 		var ret = kk.upFirst(str) // "Sdsdsd sds"
 		 * @param {string} str 处理字符�?
 		 * @return {string} 返回首字母大写的字符�?
 		 */
@@ -685,6 +753,9 @@
 		},
 		/**
 		 * @method commaNumber
+		 * @example
+		 * 		var str = "1234567";
+		 * 		var ret = kk.commaNumber(str) // "1,234,567"
 		 * @param {string|number} str 处理字符�?
 		 * @return {string} 返回以�?号分隔的字符�?
 		 * 23232312323434 =�?23,232,312,323,434
@@ -694,9 +765,11 @@
 		},
 		/**
 		 * @method param
+		 * @example
+		 * 		var str = {a: "12", b: "23"};
+		 * 		var ret = kk.param(str) // "a=12&b=23"
 		 * @param {object} a key value对象 
 		 * @return {string} 返回�?连接的字符串
-		 * {a: "12", b: "23"} => a=12&b=23
 		 */
 		param: function(a){
 			var s = [],
@@ -715,9 +788,11 @@
 		},
 		/**
 		 * @method parseJSON
+		 * @example
+		 * 		var str = "{"a": "12", "b": "23"}";
+		 * 		var ret = kk.parseJSON(str) // {a: "12", b: "23"}
 		 * @param {string} json字符�?
 		 * @return {object} json对象
-		 * "{"a": "12", "b": "23"}" => {a: "12", b: "23"}
 		 */
 		parseJSON: function(data){
 			if(typeof data !== "string" || !data){

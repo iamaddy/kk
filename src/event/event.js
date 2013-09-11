@@ -81,7 +81,7 @@ define(function(require, exports, module){
 			 */
 		 add: function(elems, types, handler, data){
 			 if(typeof elems === 'undefined') return;
-			 if(typeof elems.length === 'undefined'){
+			 if(!kk.isArray(elems)){
 				 this._add(elems, types, handler, data);
 			 } else{
 				 var self = this;

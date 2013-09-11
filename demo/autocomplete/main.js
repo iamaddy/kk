@@ -1,8 +1,10 @@
 define(function(require, exports, module){
 	var auto = require('../../src/components/autocomplete');
 	var dom = require('../../src/dom/dom');
-	new auto('#text', {
+	var s = new auto('#dd', {
 		source: ['a', 'asd', 'asdsad', 'avfdvdf', 'aedecdscr']
 	});
-	alert(dom.offset(dom('#text')).top);
+	var t = new auto('#tt', {
+		source: ['b', 'asbd', 'basdsad', 'avfdvbdf', 'aedecdbscr']
+	});
 });

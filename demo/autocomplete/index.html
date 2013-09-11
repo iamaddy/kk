@@ -1,59 +1,55 @@
 <html>
 <head>
 <style type="text/css">
-.ui-tooltip{
+.autocomplete{
+	z-index: 1051;
 	border-radius: 4px;
-	border: 1px solid #aaaaaa;
-	padding: 8px;
+}
+.menu{
 	position: absolute;
-	z-index: 9999;
-	max-width: 300px;
-	-webkit-box-shadow: 0 0 5px #aaa;
-	box-shadow: 0 0 5px #aaa;
+	min-width: 160px;
+	float: left;
+	padding: 5px 0;
+	margin: 2px 0 0;
+	list-style: none;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0,0,0,0.2);
+	webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+	box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding;
+	background-clip: padding-box;
 }
-.tab-pannel {
-width: 599px;
-padding: 10px;
+.active {
+	background-color: #a9dba9;
+	border-color: #46a546;
 }
-.tab-content {
-width: 599px;
-overflow: hidden;
-border: 1px solid #66cc66;
-border-top: 0px;
+.menu>li>a {
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: normal;
+	line-height: 20px;
+	color: #333;
+	white-space: nowrap;
 }
-ul.tab-nav {
-text-align: left;
-margin: 1em 0 0em 0;
-font: bold 11px verdana, arial, sans-serif;
-border-bottom: 1px solid #6c6;
-list-style-type: none;
-padding: 3px 10px 3px 10px;
-}
-ul.tab-nav {
-text-align: left;
-font: bold 11px verdana, arial, sans-serif;
-list-style-type: none;
-}
-ul.tab-nav li {
-display: inline;
-}
-ul.tab-nav li a {
-padding: 3px 4px;
-border: 1px solid #6c6;
-background-color: #cfc;
-color: #666;
-margin-right: 0px;
-text-decoration: none;
-border-bottom: none;
-}
-li.on a {
-border-bottom: 1px solid #fff !important;
-background-color: #fff !important;
-}
-ul.tab-nav a:hover {
-background: #fff;
-}
-input{
+.menu>.active>a, .menu>.active>a:hover, .menu>.active>a:focus {
+	color: #fff;
+	text-decoration: none;
+	background-color: #0081c2;
+	background-image: -moz-linear-gradient(top,#08c,#0077b3);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#08c),to(#0077b3));
+	background-image: -webkit-linear-gradient(top,#08c,#0077b3);
+	background-image: -o-linear-gradient(top,#08c,#0077b3);
+	background-image: linear-gradient(to bottom,#08c,#0077b3);
+	background-repeat: repeat-x;
+	outline: 0;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc',endColorstr='#ff0077b3',GradientType=0);
 }
 </style>
 <title>tab demo</title>
@@ -61,13 +57,14 @@ input{
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <body>
 <div></div>
-<input type="text" id="text" value="" size="30" />
+<input type="text" id="dd" value="" size="30" />
+<input type="text" id="tt" value="" size="30" />
 </body>
 <script type="text/javascript" src="../../sea.js"></script>
 <script type="text/javascript">
 seajs.config({
 	alias: {
-		'kk': '../../src/core/build/kankan-min',
+		'kk': '../../src/core/build/kankan',
 		'$': '../../lib/jquery'
 	},
 	preload: [

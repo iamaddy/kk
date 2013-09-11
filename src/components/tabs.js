@@ -35,9 +35,9 @@ define(function(require, exports, module){
 			 * 默认显示tab的顺序
 			@property defaultIndex 
 			@type int
-			@default 1
+			@default 0
 			**/
-			defaultIndex: 1,
+			defaultIndex: 0,
 			/**
 			 * 触发panel显示的方法，click，mouseover等
 			@property handler 

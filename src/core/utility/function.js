@@ -41,7 +41,7 @@
 			bind = FP.bind,
 			slice = Array.prototype.slice,
 			ctor = function(){};
-		if(!K.isFunciton(fn)) K.error('TypeError');
+		if(!K.isFunction(fn)) K.error('TypeError');
 		if(bind === fn.bind && bind) bind.apply(fn, slice.call(arguments, 1));
 		args = slice.call(arguments, 2);
 		return bound = function(){

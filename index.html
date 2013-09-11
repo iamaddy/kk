@@ -57,12 +57,6 @@ background: #fff;
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <body>
-	<a id="xu" data-title="你妹啊 ，是吧" style="background: red;">haha</a>
-	<input id="tt" type="radio"/>
-	<a id="xiao">啊实打实的<span>asdsd</span></a>
-	<a class="dang"></a>
-	<div id="p"><a class="dang">nishi</a>&</div>
-	<p><textarea  name="url" id="code" type="text">11</textarea></P>
 	<div id="Jtab">
 	  <ul class="tab-nav">
 		<li class="tab" id="tab_0"><a href="#">Tab One</a></li>
@@ -70,21 +64,41 @@ background: #fff;
 		<li class="tab" id="tab_2"><a href="#">Tab Three</a></li>
 	</ul>
   <div class="tab-content">
-	<div class="tab-pannel"><p>Tab One ContentTab One ContentTab One ContentTab One Content</p></div>
-    <div class="tab-pannel"><p>Tab Two ContentTab Two ContentTab Two ContentTab Two ContentTab Two Content</p></div>
-	<div class="tab-pannel"><p>sdfsdfds</p></div>
+	<div class="tab-pannel" style="display: none;"><p>Tab One ContentTab One ContentTab One ContentTab One Content</p></div>
+    <div class="tab-pannel" style="display: none;"><p>Tab Two ContentTab Two ContentTab Two ContentTab Two ContentTab Two Content</p></div>
+	<div class="tab-pannel" style="display: none;"><p>sdfsdfds</p></div>
   </div>
+  <div id="dd" style="height: 50px; width: 50px;background: #ccc;"></div>
+  <ul id="tt"></ul>
 </div>
 </body>
-<script>
-var node = document.getElementById('tab_0');
-</script>
 <script type="text/javascript" src="sea.js"></script>
 <script type="text/javascript">
+function a(){
+}
+a.prototype.guid = 1;
+a.prototype.names = [12, 34];
+a.prototype.add = function(){
+	this.guid = this.guid + 5;
+}
+a.prototype.push = function(value){
+	this.names = this.names.push(value);
+}
+var b = new a();
+b.add();
+var c = new a();
+c.push(345);
+console.log(b.guid);
+console.log(c.guid);
+a.prototype.guid++;
+console.log(b.guid);
+console.log(c.guid);
+console.log(b.names);
+console.log(c.names);
 seajs.config({
 	alias: {
 		'jquery': './lib/jquery',
-		'kk': './src/core/build/kankan-min'
+		'kk': './src/core/build/kankan'
 	},
 	preload: [
       'kk',

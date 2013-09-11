@@ -1,0 +1,32 @@
+<html>
+<head>
+<style type="text/css">
+</style>
+<title>tab demo</title>
+<style>
+img{
+	width: 500px;
+	display: block;
+}
+</style>
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<body>
+<img alt="" src="http://www.appelsiini.net/projects/lazyload/img/grey.gif" _src="http://www.appelsiini.net/projects/lazyload/img/bmw_m1_hood.jpg">
+<img alt="" src="http://www.appelsiini.net/projects/lazyload/img/grey.gif" _src="http://www.appelsiini.net/projects/lazyload/img/corvette_pitstop.jpg">
+<img alt="" src="http://www.appelsiini.net/projects/lazyload/img/grey.gif" _src="http://www.appelsiini.net/projects/lazyload/img/bmw_m3_gt.jpg">
+<img alt="" src="http://www.appelsiini.net/projects/lazyload/img/grey.gif" _src="http://www.appelsiini.net/projects/lazyload/img/viper_corner.jpg">
+</body>
+<script type="text/javascript" src="../../sea.js"></script>
+<script type="text/javascript">
+seajs.config({
+	alias: {
+		'kk': '../../src/core/build/kankan'
+	},
+	preload: [
+      'kk',
+	]
+});
+seajs.use('./main');
+</script>
+</html>
