@@ -13,7 +13,7 @@ define(function(require, exports, module){
 	 * 重新定义事件对象
 	 */
 	var Event = function(event, props){
-		if(!this.preventDefault){
+		if(!(this instanceof Event)){
 			return new Event(event, props);
 		}
 		if(event && event.type){
@@ -22,7 +22,7 @@ define(function(require, exports, module){
 			this.isDefaultPrevented = (event.defaultPrevented || event.returnValue === false ||
 					event.getPreventDefault && event.getPreventDefault()) ? returnTrue_FN : returnFalse_FN;
 		} else {
-			this.type = src;
+			this.type = event;
 		}
 		this.timeStamp = kk.now();
 		kk.extend(this, props);
@@ -101,13 +101,18 @@ define(function(require, exports, module){
 				return;
 			}
 			types = types.split(" ");
+			var handleObj = {elem: elem, handler: handler},
+				fn = function( e ) {
+				return e ? event.dispatch.call( elem, arguments, handleObj ) :
+					undefined;
+			};
 			var type, i = 0;
 			while((type = types[i++])){
 				if ( elem.addEventListener ) {
-					elem.addEventListener( type, handler, false );
+					elem.addEventListener( type, fn, false );
 				} else if ( elem.attachEvent ) {
 					elem.attachEvent( "on" + type, function(){
-						handler.apply(elem, arguments);
+						fn.apply(elem, arguments);
 					} );
 				}
 			}
@@ -127,6 +132,38 @@ define(function(require, exports, module){
 					elem.detachEvent( "on" + type, handler );
 				}
 			}
+		},
+		/**
+		 * 修正各浏览器的bug
+		 */
+		eventFix: function(e){
+			var originalEvent = e && e[0],
+				copy = originalEvent;
+			e = Event( originalEvent );
+			for(var prop in copy){
+				if(!e[prop]){
+					e[prop] = copy[prop];
+				}
+			}
+			if(!e.target){
+				e.target = e.srcElement || document;
+			}
+			// 节点不能是文本
+			if(e.target.nodeType === 3){
+				e.target = e.target.parentNode;
+			}
+			return e;
+		},
+		/**
+		 * 事件方法的分派
+		 */
+		dispatch: function(e, handlerObj){
+			e = event.eventFix(e || window.event);
+			var args = [].slice.call( arguments, 0 ),
+			handlerQueue = [];
+			args[0] = e;
+			e.delegateTarget = this;
+			var ret = handlerObj.handler.apply( handlerObj.elem, args );
 		}
 	};
 	/**
