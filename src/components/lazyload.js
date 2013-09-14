@@ -1,8 +1,8 @@
 /**
- * 图片懒加载
+ * 图片懒加载 图片在视野位置加载
  * @author xubin
  * @date 2013-09-011
- * @class 滚动到图片位置加载
+ * @class LazyLoad
  */
 define(function(require, exports, module){
 	var dom 	= require('../dom/dom');
@@ -47,15 +47,15 @@ define(function(require, exports, module){
 			
 	};
 	/**
-	 * 
+	 * 图片懒加载
 	 */
 	function LazyLoad(elem, options){
 		elem = elem || 'img';
 		this._elem = dom(elem);
 		this.options = kk.extend({}, defaults, options);
 		this.container = {
-			x: document.body.clientWidth,
-			y: document.body.clientHeight
+			x: window.innerWidth || document.documentElement.clientWidth,
+			y: window.innerHeight || document.documentElement.clientHeight
 		};
 		this.init();
 	}
@@ -69,40 +69,62 @@ define(function(require, exports, module){
 			kk.each(this._elem, function(i, item){
 				this.pos(item);
 			}, this);
-			event.add(window, this.options.type, kk.bind(this.show, this));
+			if(this.options.type === 'scroll'){
+				event.add(window, this.options.type, kk.bind(this.show, this));
+				event.add(window, 'resize', kk.bind(this.show, this));
+			} else {
+				// todo 其他事件触发
+			}
+			
 			if(this.options.autoload){
 				this.loadByTime(this.options.time);
 			}
 			return this;
 		},
 		show: function(){
+			this.container = {
+				x: window.innerWidth || document.documentElement.clientWidth,
+				y: window.innerHeight || document.documentElement.clientHeight
+			};
 			var that = this;
-			setTimeout(function(){
+			if(Timer){
+				clearTimeout(Timer);
+			}
+			var Timer = setTimeout(function(){
 				kk.each(that._elem, function(i, item){
 					that.pos(item);
 				});
-			}, 200);
+			}, 400);
 			return this;
 		},
 		/**
 		 * 计算elem的位置，是否在可视的区域，在则加载图片
 		 */
 		pos: function(elem){
+			var _url = dom.attr(elem, this.options.attrName);
+			var url = elem.src;
+			if(url === _url){
+				return;
+			}
 			var position = dom.offset(elem);
-			var scrollX = window.scrollX || document.body.scrollLeft;
-			var scrollY = window.scrollY || document.body.scrollTop;
+			/**
+			 * safari 支持 window.pageXOffset
+			 * chrome 等标准浏览器支持window.scrollX
+			 * IE6、7、8等支持document.documentElement.scrollLeft
+ 			 */
+			var scrollX = window.scrollX || window.pageXOffset || document.documentElement.scrollLeft;
+			var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
 			if(scrollX + this.container.x >= position.left + this.options.threshold && 
 				scrollY + this.container.y >= position.top + this.options.threshold){
-				var _url = dom.attr(elem, this.options.attrName);
-				var url = dom.attr(elem, 'src');
-				if(url !== _url){
-					dom.attr(elem, 'src', _url);
-				}
+				
+				elem.src =  _url;
 			}
 			return this;
 		},
 		/**
 		 * 延迟一定时间一次性全部加载
+		 * @method loadByTime
+		 * @param {Int} time  
 		 */
 		loadByTime: function(time){
 			var that = this;
