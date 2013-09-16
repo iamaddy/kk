@@ -61,6 +61,51 @@ define(function(require, exports, module){
 			this.stopPropagation();
 		}
 	};
+	Event.data = {};
+	Event.guid = 10000;
+	/**
+	 * 缓存事件方法
+	 */
+	Event.cache = function(target){
+		for(var i in this.data){
+			if(this.data[i].elem === target.elem){
+				this.data[i].events.push({event: target.handler, type: target.type, fn: target.fn});
+				return;
+			}
+		}
+		this.data[target.guid] = {
+				elem : target.elem,
+				events: [{event: target.handler, type: target.type, fn: target.fn}]
+		};
+	};
+	/**
+	 * 返回elem的注册函数
+	 */
+	Event.getData = function(elem, type, handler){
+		var fn = undefined;
+		for(var i in this.data){
+			if(this.data[i].elem === elem){
+				var events = this.data[i].events;
+				kk.each(events, function(i, e){
+					if(e.type === type && e.event === handler){
+						fn = e.fn;
+						return;
+					}
+				});
+			}
+		}
+		return fn;
+	};
+	/**
+	 * 移除注册事件函数
+	 */
+	Event.removeData = function(elem, type, handler){
+		for(var i in this.data){
+			if(this.data[i].elem === elem && !~this.data[i].events.indexOf({type: type, event: handler})){
+				this.data[i].events.splice(this.data[i].events.indexOf({type: type, event: handler}), 1);
+			}
+		}
+	}
 	var event = {
 			/**
 			 * 在选择元素上绑定一个或多个事件的事件处理函数,
@@ -101,22 +146,37 @@ define(function(require, exports, module){
 				return;
 			}
 			types = types.split(" ");
-			var handleObj = {elem: elem, handler: handler},
-				fn = function( e ) {
-				return e ? event.dispatch.call( elem, arguments, handleObj ) :
-					undefined;
-			};
 			var type, i = 0;
 			while((type = types[i++])){
+				var handleObj = {elem: elem, handler: handler, guid: Event.guid++, type: type},
+					fn = function( e ) {
+						return e ? event.dispatch.call( elem, arguments, handleObj ) : undefined;
+					};
 				if ( elem.addEventListener ) {
 					elem.addEventListener( type, fn, false );
+					handleObj.fn = fn;
 				} else if ( elem.attachEvent ) {
-					elem.attachEvent( "on" + type, function(){
+					var ieFn = function(){
 						fn.apply(elem, arguments);
-					} );
+					}
+					elem.attachEvent( "on" + type, ieFn);
+					handleObj.fn = ieFn;
 				}
+				Event.cache(handleObj);
 			}
+			elem = null;
 		},
+		remove: function(elems, types, handler, data){
+			 if(typeof elems === 'undefined') return;
+			 if(!kk.isArray(elems)){
+				 this._remove(elems, types, handler, data);
+			 } else{
+				 var self = this;
+				 kk.each(elems, function(i, item){
+					 self._remove(item, types, handler, data);
+				 });
+			 }
+		 },
 		_remove: function(elem, types, handler){
 			if ( elem.nodeType === 3 || elem.nodeType === 8 ) {
 				return;
@@ -124,12 +184,14 @@ define(function(require, exports, module){
 			if ( handler === false ) {
 				handler = returnFalse_FN;
 			}
+			var type, i = 0;
 			types = types.split(" ");
 			while ( (type = types[ i++ ]) ) {
+				var fn = Event.getData(elem, type, handler);
 				if ( elem.removeEventListener ) {
-					elem.removeEventListener( type, handler, false );
+					elem.removeEventListener( type, fn, false );
 				} else if ( elem.detachEvent ) {
-					elem.detachEvent( "on" + type, handler );
+					elem.detachEvent( "on" + type, fn );
 				}
 			}
 		},
