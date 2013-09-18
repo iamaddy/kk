@@ -119,6 +119,10 @@ define(function(require, exports, module){
 	function send(s, complete){
 		var xhr = s.xhr();
 		xhr.open( s.type, s.url, s.async );
+		// POST 方式则以表单的方式提交
+		if(s.type.toUpperCase() === "POST"){
+			xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
+		}
 		xhr.send( ( s.hasContent && s.data ) || null );
 		callback = function(){
 			var status,
@@ -142,6 +146,7 @@ define(function(require, exports, module){
 					} catch( e ) {
 						statusText = "";
 					}
+					// 非原生的XHR IE会将204设置为1223
 					if ( !status ) {
 						status = responses.text ? 200 : 404;
 					} else if ( status === 1223 ) {
