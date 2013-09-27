@@ -1,5 +1,5 @@
 /**
- * 总命名空间kk，项目名�?
+ * 总命名空间kk，项目名称
  * @module kk
  */
 ;(function(window, undefined){
@@ -9,11 +9,11 @@
 			EMPTY = '';
 		K = {
 			/**
-			 * 版本�?
+			 * 版本号
 			 */
 			version: "1.0.0",
 			/**
-			 * kk的执行环�?
+			 * kk的执行环境
 			 */
 			Env: host,
 			/**
@@ -72,23 +72,23 @@
         'valueOf'
     ];
 	/**
-	 * 可以扩展kk自身，也可以扩展对象的属�?
+	 * 可以扩展kk自身，也可以扩展对象的属性
 	 * @method extend
 	 */
-	// 参照jquery 的继承函数，核心代码，所有的功能基于此函�?
+	// 参照jquery 的继承函数，核心代码，所有的功能基于此函数
 	K.extend = function() {
 		var options, name, src, copy, copyIsArray, clone,
 			target = arguments[0] || {},
 			i = 1,
 			length = arguments.length,
 			deep = false;
-		// 是否深拷�?
+		// 是否深拷贝
 		if ( typeof target === "boolean" ) {
 			deep = target;
 			target = arguments[1] || {};
 			i = 2;
 		}
-		// 若target不是object或�?function，则置为空对�?
+		// 若target不是object或者function，则置为空对象
 		if ( typeof target !== "object" && !K.isFunction(target) ) {
 			target = {};
 		}
@@ -103,7 +103,7 @@
 				for ( name in options ) {
 					src = target[ name ];
 					copy = options[ name ];
-					// 防止循环继承  进入死循�?
+					// 防止循环继承  进入死循环
 					if ( target === copy ) {
 						continue;
 					}
@@ -115,7 +115,7 @@
 						} else {
 							clone = src && K.isPlainObject(src) ? src : {};
 						}
-						// 不改变原始对象，克隆�?
+						// 不改变原始对象，克隆之
 						target[ name ] = K.extend( deep, clone, copy );
 					//  过滤value 是undefined值的
 					} else if ( copy !== undefined ) {
@@ -124,7 +124,7 @@
 				}
 			}
 		}
-		// 返回扩展的对�?
+		// 返回扩展的对象
 		return target;
 	};
 	K.extend({
@@ -132,7 +132,7 @@
 		 * 获取对象的所有key
 		 * @method keys
 		 * @param {object} 查询对象
-		 * @return {array} 返回可遍历的属�?
+		 * @return {array} 返回可遍历的属性
 		 */
 		keys: function(o){
 			var result = [], p, i;
@@ -151,7 +151,7 @@
 		}
 	});
 })(kk);/**
- * kk的公共模块，类型�?��等功�?
+ * kk的公共模块，类型检测等功能
  * @author xubin
  * @mail xuaddy@gmail.com
  * @date 2013-7-15
@@ -166,7 +166,7 @@
 		hasOwn = Object.prototype.hasOwnProperty;
 	var common = {
 		/**
-		 * 是否是函�?
+		 * 是否是函数
 		 * @method isFunction
 		 * @param {object} obj
 		 * @return {boolean}
@@ -229,7 +229,7 @@
 			return this.type(obj) === "regexp";
 		},
 		/**
-		 * 是否是bool�?
+		 * 是否是bool值
 		 * @method isBoolean
 		 * @param {object} obj
 		 * @return {boolean}
@@ -238,7 +238,7 @@
 			return this.type(obj) === "boolean";
 		},
 		/**
-		 * 是否是null�?
+		 * 是否是null值
 		 * @method isNull
 		 * @param {object} obj
 		 * @return {boolean}
@@ -349,7 +349,7 @@
 	K.extend({
 		/**
 		 * @method makeArray
-		 * @param {array} array 待合并对�?
+		 * @param {array} array 待合并对象
 		 * @param {array} results 目标数组
 		 * @example
 		 * 		var s = [1, 3];
@@ -358,7 +358,7 @@
 		 * 		ret = kk.makeArray(s, result); // [3, 5, 1, 3]
 		 * 		s = '12354';
 		 * 		ret = kk.makeArray(s, result); // [3, 5, "12354"]
-		 * @return {array} 返回合并之后的数�?
+		 * @return {array} 返回合并之后的数组
 		 */
 		makeArray: function( array, results ) {
 			var ret = results || [];
@@ -382,7 +382,7 @@
 		 * 		result = {a: 1, b: "sss"};
 		 * 		ret = kk.merge(s, result); // [1, 3, 1, "sss"]
 		 * @param {array} target 目标数组
-		 * @param {array|object} arr 合并对象，可以数组或者对�?
+		 * @param {array|object} arr 合并对象，可以数组或者对象
 		 * @return {array} 返回合并后的数组
 		 */
 		merge: function(target, arr){
@@ -406,8 +406,8 @@
 		 * 		var ret = kk.indexOf(number, 4) // 2
 		 * 		var ret = kk.indexOf(number, 6) // -1
 		 * @param {array} arr 查询数组
-		 * @param {arr} item 待查找对�?
-		 * @return {int} 返回item首次出现在数组的位置，优先调用原生接�?
+		 * @param {arr} item 待查找对象
+		 * @return {int} 返回item首次出现在数组的位置，优先调用原生接口
 		 */
 		indexOf: indexOf ?
 			function(arr, item){
@@ -426,8 +426,8 @@
 		 * 		var ret = kk.lastIndeOf(number, 4) // 0
 		 * 		var ret = kk.lastIndeOf(number, 6) // -1
 		 * @param {array} arr 查询数组
-		 * @param {arr} item 待查找对�?
-		 * @return {int} 从右�?��，返回item首次出现在数组的位置，优先调用原生接�?
+		 * @param {arr} item 待查找对象
+		 * @return {int} 从右往左，返回item首次出现在数组的位置，优先调用原生接口
 		 */
 		lastIndeOf: lastIndexOf ? 
 			function(arr, item){
@@ -445,7 +445,7 @@
 		 * 		var number = [1, 3, 4, 3, 5, 5, 4];
 		 * 		var ret = kk.inArray(number, 4) // true
 		 * @param {array} arr 查询数组
-		 * @param {arr} item 待查找对�?
+		 * @param {arr} item 待查找对象
 		 * @return {boolean} 是否存在
 		 */
 		inArray: function (arr, item) {
@@ -513,7 +513,7 @@
 		 * @param {array} arr 查询数组
 		 * @param {function} iterator 迭代函数
 		 * @param {object} context 迭代器的执行环境
-		 * @return {boolean} 当数组中�?��元素调用迭代函数返回true，就返回ture，否则false
+		 * @return {boolean} 当数组中所有元素调用迭代函数返回true，就返回ture，否则false
 		 */
         every: function(arr, iterator, context){
         	var result = true;
@@ -649,6 +649,37 @@
 		}
 		return this;
 	};
+	/**
+	 * 节流函数——onscroll/onresize 等事件引起的大量计算
+	 * @author addy
+	 * @date 2013-09-27
+	 * @method throttle
+	 * @param {Function}fn
+	 * @param {Int} delay
+	 * @param {Int} mustRunDelay
+	 * @param {Object} context
+	 * @return {Function} fn
+	 * @example
+	 * 		window.onscroll = kk.throttle(myFun, 200, 400);
+	 * 
+	 */
+	K.throttle = function(fn, delay, mustRunDelay, context){
+		var timer = null;
+		var t_start = +new Date();
+		mustRunDelay = 500 || mustRunDelay;
+		return function(){
+			var context = context || this, args = arguments, t_curr = +new Date();
+			clearTimeout(timer);
+			if(t_curr - t_start >= mustRunDelay){
+				fn.apply(context, args);
+				t_start = t_curr;
+			} else {
+				timer = setTimeout(function(){
+					fn.apply(context, args);
+				}, 400 || delay);
+			}
+		};
+	};
 	K.bind = bind;
 })(kk);
 /**
@@ -678,8 +709,8 @@
 		 * @example
 		 * 		var str = " sdsdsd sds  ";
 		 * 		var ret = kk.trim(str) // "sdsdsd sds"
-		 * @param {string} str 查询字符�?
-		 * @return {string} 空字符串或�?trim之后的结�?
+		 * @param {string} str 查询字符串
+		 * @return {string} 空字符串或者trim之后的结果
 		 */
 		trim: trim ? 
 			function(str){
@@ -693,8 +724,8 @@
 		 * @example
 		 * 		var str = " sdsdsd sds  ";
 		 * 		var ret = kk.trimL(str) // "sdsdsd sds  "
-		 * @param {string} str 查询字符�?
-		 * @return {string} 截取左侧空字符串之后的结�?
+		 * @param {string} str 查询字符串
+		 * @return {string} 截取左侧空字符串之后的结果
 		 */
 		trimL: function(str){
 			return str == null ? EMPTY : (str + EMPTY).replace(L_TRIM, EMPTY);
@@ -704,8 +735,8 @@
 		 * @example
 		 * 		var str = " sdsdsd sds  ";
 		 * 		var ret = kk.trimR(str) // " sdsdsd sds"
-		 * @param {string} str 查询字符�?
-		 * @return {string} 截取右侧空字符串之后的结�?
+		 * @param {string} str 查询字符串
+		 * @return {string} 截取右侧空字符串之后的结果
 		 */
 		trimR: function(str){
 			return str == null ? EMPTY : (str + EMPTY).replace(R_TRIM, EMPTY);
@@ -716,9 +747,9 @@
 		 * 		var str = "sdsdsd sds";
 		 * 		var ret = kk.startWith(str, 'sd') // true
 		 * 		ret = kk.startWith(str, 'd') // false
-		 * @param {string} str 查询字符�?
+		 * @param {string} str 查询字符串
 		 * @param {string} prefix 查询后缀
-		 * @return {Boolean} 是否以prefix�?��
+		 * @return {Boolean} 是否以prefix开头
 		 */
 		startWith: function(str, prefix){
 			if(prefix === EMPTY) return false;
@@ -730,7 +761,7 @@
 		 * 		var str = "sdsdsd sds";
 		 * 		var ret = kk.endWith(str, 'sd') // false
 		 * 		ret = kk.endWith(str, 's') // true
-		 * @param {string} str 查询字符�?
+		 * @param {string} str 查询字符串
 		 * @param {string} suffix 查询后缀
 		 * @return {Boolean} 是否以suffix结尾
 		 */
@@ -744,8 +775,8 @@
 		 * @example
 		 * 		var str = "sdsdsd sds";
 		 * 		var ret = kk.upFirst(str) // "Sdsdsd sds"
-		 * @param {string} str 处理字符�?
-		 * @return {string} 返回首字母大写的字符�?
+		 * @param {string} str 处理字符串
+		 * @return {string} 返回首字母大写的字符串
 		 */
 		upFirst: function(str){
 			str += EMPTY;
@@ -756,9 +787,9 @@
 		 * @example
 		 * 		var str = "1234567";
 		 * 		var ret = kk.commaNumber(str) // "1,234,567"
-		 * @param {string|number} str 处理字符�?
-		 * @return {string} 返回以�?号分隔的字符�?
-		 * 23232312323434 =�?23,232,312,323,434
+		 * @param {string|number} str 处理字符串
+		 * @return {string} 返回以逗号分隔的字符串
+		 * 23232312323434 =》 23,232,312,323,434
 		 */
 		commaNumber: function(str){
 			return str.toString().replace(COMMA, '$1,');
@@ -769,7 +800,7 @@
 		 * 		var str = {a: "12", b: "23"};
 		 * 		var ret = kk.param(str) // "a=12&b=23"
 		 * @param {object} a key value对象 
-		 * @return {string} 返回�?连接的字符串
+		 * @return {string} 返回以&连接的字符串
 		 */
 		param: function(a){
 			var s = [],
@@ -791,7 +822,7 @@
 		 * @example
 		 * 		var str = "{"a": "12", "b": "23"}";
 		 * 		var ret = kk.parseJSON(str) // {a: "12", b: "23"}
-		 * @param {string} json字符�?
+		 * @param {string} json字符串
 		 * @return {object} json对象
 		 */
 		parseJSON: function(data){

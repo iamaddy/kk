@@ -5,8 +5,8 @@
  * @class Tabs
  */
 define(function(require, exports, module){
-	var dom 	= require('../dom/dom');
-	var event 	= require('../event/event');
+	var dom 	= require('dom');
+	var event 	= require('event');
 	
 	function Tabs(config){
 		this.defaults 	= {

@@ -71,7 +71,7 @@ define(function(require, exports, module){
 			}, this);
 			if(this.options.type === 'scroll'){
 				event.add(window, this.options.type, kk.bind(this.show, this));
-				event.add(window, 'resize', kk.bind(this.show, this));
+				event.add(window, 'resize', kk.bind(kk.throttle(this.show), this));
 			} else {
 				// todo 其他事件触发
 			}
@@ -87,15 +87,9 @@ define(function(require, exports, module){
 				y: window.innerHeight || document.documentElement.clientHeight
 			};
 			var that = this;
-			if(Timer){
-				clearTimeout(Timer);
-			}
-			var Timer = setTimeout(function(){
-				kk.each(that._elem, function(i, item){
-					that.pos(item);
-				});
-			}, 400);
-			return this;
+			kk.each(that._elem, function(i, item){
+				that.pos(item);
+			});
 		},
 		/**
 		 * 计算elem的位置，是否在可视的区域，在则加载图片

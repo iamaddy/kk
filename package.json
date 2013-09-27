@@ -4,10 +4,12 @@
   "version": "1.0.0",
   "spm": {
         "alias": {
-			"kk": "src/core/build/kankan-min",
-			"dom": "src/dom/dom",
-			"lazyload": "src/components/lazyload",
-			"tabs": "src/components/tabs"
+			"kk": "dist/src/core/build/kankan-min",
+			"tooltip": "dist/src/components/tooltip",
+			"dom": "dist/src/dom/dom",
+			"lazyload": "dist/src/components/lazyload",
+			"tabs": "dist/src/components/tabs",
+			"event": "dist/src/event/event"
         }
    },
   "devDependencies": {

@@ -96,5 +96,36 @@
 		}
 		return this;
 	};
+	/**
+	 * 节流函数——onscroll/onresize 等事件引起的大量计算
+	 * @author addy
+	 * @date 2013-09-27
+	 * @method throttle
+	 * @param {Function}fn
+	 * @param {Int} delay
+	 * @param {Int} mustRunDelay
+	 * @param {Object} context
+	 * @return {Function} fn
+	 * @example
+	 * 		window.onscroll = kk.throttle(myFun, 200, 400);
+	 * 
+	 */
+	K.throttle = function(fn, delay, mustRunDelay, context){
+		var timer = null;
+		var t_start = +new Date();
+		mustRunDelay = 500 || mustRunDelay;
+		return function(){
+			var context = context || this, args = arguments, t_curr = +new Date();
+			clearTimeout(timer);
+			if(t_curr - t_start >= mustRunDelay){
+				fn.apply(context, args);
+				t_start = t_curr;
+			} else {
+				timer = setTimeout(function(){
+					fn.apply(context, args);
+				}, 400 || delay);
+			}
+		};
+	};
 	K.bind = bind;
 })(kk);
