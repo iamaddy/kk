@@ -6,12 +6,7 @@ xunlei kankan javascript
 
 ###目录结构
 #### src：源码   
-* ajax   
-* core   
-* dom    
-* event    
-* util   
-* components
+<img src="http://iamaddy.github.io/images/kk.bmp">
 
 #### out: api文档
 #### modules: 业务模块
