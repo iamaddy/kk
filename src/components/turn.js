@@ -26,7 +26,7 @@
 define(function(require, exports, module){
 	var d   = require('../dom/dom'),
 	    event = require('../event/event');
-	    FX  = require('./node');
+	    FX  = require('.anim/node');
 
 	function Turn(){
 		this.config = {},
