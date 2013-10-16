@@ -70,7 +70,7 @@ define(function(require, exports, module){
 				this.pos(item);
 			}, this);
 			if(this.options.type === 'scroll'){
-				event.add(window, this.options.type, kk.bind(this.show, this));
+				event.add(window, this.options.type, kk.bind(kk.throttle(this.show), this));
 				event.add(window, 'resize', kk.bind(kk.throttle(this.show), this));
 			} else {
 				// todo 其他事件触发
@@ -108,10 +108,12 @@ define(function(require, exports, module){
  			 */
 			var scrollX = window.scrollX || window.pageXOffset || document.documentElement.scrollLeft;
 			var scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-			if(scrollX + this.container.x >= position.left + this.options.threshold && 
-				scrollY + this.container.y >= position.top + this.options.threshold){
-				
+			if(scrollX + this.container.x > position.left + this.options.threshold && 
+				scrollY + this.container.y > position.top + this.options.threshold &&
+				scrollX < position.left + this.options.threshold && 
+				scrollY < position.top + this.options.threshold){
 				elem.src =  _url;
+				console.log(elem);
 			}
 			return this;
 		},
